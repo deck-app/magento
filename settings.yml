@@ -1,29 +1,35 @@
 #User defined
 user:
-  # php_version:
-  #   label:
-  #     PHP version
-  #   hint:
-  #     Select a PHP version from the list above
-  #   type:
-  #     select
-  #   values:
-  #     - 5.6
-  #     - 5.7
-  #     - 7.2
-  #     - 8.1
-  #   target:
-  #     PHP_VERSION
+  back_end:
+    label:
+      Backend
+    hint:
+      Select a backend from the list above
+    type:
+      select
+    values:
+      - apache
+      - nginx
+    target:
+      BACK_END
 
-  # install_xdebug:
-  #   label:
-  #     Install XDEBUG?
-  #   type:
-  #     checkbox
-  #   hint:
-  #     Check to enable XDEBUG installation
-  #   target:
-  #     INSTALL_XDEBUG
+  php_error_reporting:
+    label:
+      Enable PHP error reporting?
+    type:
+      checkbox
+    hint: Check the box to display PHP errors 
+    target:
+      DISPLAY_PHPERROR
+  php_xdebug:
+    label:
+      Enable PHP extension XDEBUG?
+    type:
+      checkbox
+    hint: Check the box to display extension xdebug
+    target:
+      XDEBUG
+    
   # mysql_version:
   #   label:
   #     MySQL version
@@ -43,11 +49,11 @@ user:
   #   type:
   #     input
   #   values:
-  #     /var/www/html/app/design/frontend/mytheme/default
+  #     /var/www
   #   hint:
   #     Server document root
   #   target:
-  #     DOCUMENT_ROOT
+      # SERVER_ROOT
 
 #System defaults
 system:
@@ -60,6 +66,7 @@ system:
   #Generate public ports for the docker image
   ports:
     http:
-      MAGENTO_HTTP_PORT
-    others:
+      MAGENTO_HOST_HTTP_PORT
+    other:
       - MYSQL_PORT
+      - PMA_PORT
