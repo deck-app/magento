@@ -1,5 +1,17 @@
 #User defined
 user:
+  # back_end:
+  #   label:
+  #     Backend
+  #   hint:
+  #     Select a backend from the list above
+  #   type:
+  #     select
+  #   values:
+  #     - apache
+  #     - nginx
+  #   target:
+  #     BACK_END
   # php_version:
   #   label:
   #     PHP version
@@ -8,46 +20,54 @@ user:
   #   type:
   #     select
   #   values:
-  #     - 5.6
-  #     - 5.7
-  #     - 7.2
-  #     - 8.1
+  #     - 7.4
+  #     - "8.0"
   #   target:
   #     PHP_VERSION
 
-  # install_xdebug:
+  php_error_reporting:
+    label:
+      Enable PHP error reporting?
+    type:
+      checkbox
+    hint: Check the box to display PHP errors 
+    target:
+      DISPLAY_PHPERROR
+  php_xdebug:
+    label:
+      Enable PHP extension XDEBUG?
+    type:
+      checkbox
+    hint: Check the box to display extension xdebug
+    target:
+      XDEBUG
+    
+  # MariaDB_version:
   #   label:
-  #     Install XDEBUG?
-  #   type:
-  #     checkbox
+  #     MariaDB version
   #   hint:
-  #     Check to enable XDEBUG installation
-  #   target:
-  #     INSTALL_XDEBUG
-  # mysql_version:
-  #   label:
-  #     MySQL version
-  #   hint:
-  #     Select MySQL version
+  #     Select a MariaDB version from the list above
   #   type:
   #     select
   #   values:
-  #     - "5.0"
-  #     - "7.0"
+  #     - latest
+  #     - 10.7
+  #     - 10.6
+  #     - 10.5
   #   target:
-  #     MYSQL_VERSION
+  #     MARIADB_VERSION
 
-  # customize_server_root_path:
-  #   label:
-  #     Server root
-  #   type:
-  #     input
-  #   values:
-  #     /var/www/html/app/design/frontend/mytheme/default
-  #   hint:
-  #     Server document root
-  #   target:
-  #     DOCUMENT_ROOT
+  customize_admin_password:
+    label:
+      Application admin password
+    type:
+      input
+    values:
+      P@ssw0rd
+    hint:
+      Application admin password
+    target:
+      ADMIN_PASSWD
 
 #System defaults
 system:
@@ -60,6 +80,7 @@ system:
   #Generate public ports for the docker image
   ports:
     http:
-      MAGENTO_HTTP_PORT
+      MAGENTO_HOST_HTTP_PORT
     others:
       - MYSQL_PORT
+      - PMA_PORT
