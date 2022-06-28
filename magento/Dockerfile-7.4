@@ -67,7 +67,7 @@ RUN cd /app && \
   curl https://codeload.github.com/magento/magento2/tar.gz/2.4.3 -o 2.4.3.tar.gz && \
   tar xvf 2.4.3.tar.gz
 COPY index.php /app/magento2-2.4.3/index.php
-COPY php.env /app/magento2-2.4.3/app/etc/php.env
+COPY env.php /app/env.php
 COPY install.sh /install.sh
 RUN chmod +x /install.sh
 
@@ -86,6 +86,11 @@ RUN sed -i "s#{DB_USER}#${DB_USER}#g" /install.sh
 RUN sed -i "s#{DB_PASSWORD}#${DB_PASSWORD}#g" /install.sh
 RUN sed -i "s#{ADMIN_PASSWD}#${ADMIN_PASSWD}#g" /install.sh
 RUN sed -i "s#{MAGENTO_VERSION}#${MAGENTO_VERSION}#g" /install.sh
+
+RUN sed -i "s#{DB_NAME}#${DB_NAME}#g" /app/env.php
+RUN sed -i "s#{DB_USER}#${DB_USER}#g" /app/env.php
+RUN sed -i "s#{DB_PASSWORD}#${DB_PASSWORD}#g" /app/env.php
+
 RUN sed -i "s#{USER_ID}#${USER_ID}#g" /docker-entrypoint.sh
 RUN sed -i "s#{GROUP_ID}#${GROUP_ID}#g" /docker-entrypoint.sh
 

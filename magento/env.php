@@ -16,10 +16,10 @@ return [
         'table_prefix' => '',
         'connection' => [
             'default' => [
-                'host' => 'mariadb-gert',
-                'dbname' => 'test',
-                'username' => 'test',
-                'password' => 'test',
+                'host' => 'mariadb-{DB_HOSTNAME}',
+                'dbname' => '{DB_NAME}',
+                'username' => '{DB_USER}',
+                'password' => '{DB_PASSWORD}',
                 'model' => 'mysql4',
                 'engine' => 'innodb',
                 'initStatements' => 'SET NAMES utf8;',
