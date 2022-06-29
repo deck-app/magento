@@ -84,3 +84,4 @@ system:
     others:
       - MYSQL_PORT
       - PMA_PORT
+      - SEARCH_PORT
