@@ -23,6 +23,8 @@ jobs:
         hostname: magento
     - name: Container check
       run:  docker ps
+    - name: Host Name check
+      run: docker exec magento_magento_1 hostname
     # - name: PHP version check
     #   run: docker exec magento_magento_1 php -v
     # - name: Mysql Driver check
