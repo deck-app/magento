@@ -33,12 +33,13 @@ if [[ "$(ls -A "/var/www/")" ]] ;
         chmod u+x bin/magento
         composer selfupdate
         HOST=`hostname`
-        NAME=`echo $HOST | sed 's:.*-::'`
+        NAME=`echo $HOST | cut -c9-`
         sed -i "s/{DB_HOSTNAME}/$NAME/g" /install.sh
         sed -i "s/{DB_HOSTNAME}/$NAME/g" /app/env.php
         sh /install.sh
         cp /root/.composer/auth.json /var/www/var/composer_home/auth.json
 fi
+composer update
 
 if [[ {BACK_END} = nginx ]] ;
 then
@@ -53,4 +54,5 @@ fi
 
 rm -rf /var/preview
 cp /app/env.php /var/www/app/etc/env.php
+echo "Application installed successfully"
 exec "$@"

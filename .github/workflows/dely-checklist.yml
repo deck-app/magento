@@ -1,0 +1,44 @@
+name: Magento 
+
+on:
+  schedule:
+  - cron:  '30 1 * * *'
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Magento-mariadb-AMD64:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image Magento, phpmyadmin, mariadb and elasticsearch
+      run: docker-compose -f "docker-compose.yml" up -d --build
+      env:
+        PHP_VERSION: "7.4"
+        XDEBUG: true
+        DISPLAY_PHPERROR: true
+        APP_CODE_PATH_HOST: /tmp/magento
+    - name: Container check
+      run:  docker ps
+    # - name: Mongodb driver check
+    #   run:  docker exec laravel_laravel_1 php -m | grep mongo
+    # - name: Mysql Driver check
+    #   run: docker exec laravel_laravel_1 php -m | grep mysqli
+    # - name: Git Version check
+    #   run: docker exec laravel_laravel_1 git --version
+    # - name: Curl Version check
+    #   run: docker exec laravel_laravel_1 curl --version
+    # - name: Nodejs Version check
+    #   run: docker exec laravel_laravel_1 node --version
+    # - name: NPM Version check
+    #   run: docker exec laravel_laravel_1 npm --version
+    # - name: Composer test
+    #   run: docker exec laravel_laravel_1 composer
+    # - name: Check laravel install or not
+    #   run:  |
+    #     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
+    #     do 
+    #       sleep 10s
+    #     done

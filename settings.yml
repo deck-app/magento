@@ -65,7 +65,7 @@ user:
     values:
       P@ssw0rd
     hint:
-      Application admin password
+      Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
     target:
       ADMIN_PASSWD
 
