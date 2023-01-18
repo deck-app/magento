@@ -19,8 +19,8 @@ if [[ "$(ls -A "/var/www/")" ]] ;
         echo "If the Directory is not empty, please delete the hidden files and directory"
     else
          echo >&2 "Magento not found in $(pwd) - Create apps please patience..."
-        tar cf - --one-file-system -C /app/magento2-2.4.3/ . | tar xf -
-        tar cf - --one-file-system -C /app/magento2-2.4.3/.htaccess . | tar xf -
+        tar cf - --one-file-system -C /app/magento2-2.4.5/ . | tar xf -
+        tar cf - --one-file-system -C /app/magento2-2.4.5/.htaccess . | tar xf -
         composer install && composer config repositories.magento composer https://repo.magento.com/
         find . -type d -exec chmod 770 {} \;
         find . -type f -exec chmod 660 {} \;
