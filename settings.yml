@@ -25,22 +25,22 @@ user:
   #   target:
   #     PHP_VERSION
 
-  php_error_reporting:
-    label:
-      Enable PHP error reporting?
-    type:
-      checkbox
-    hint: Check the box to display PHP errors 
-    target:
-      DISPLAY_PHPERROR
-  php_xdebug:
-    label:
-      Enable PHP extension XDEBUG?
-    type:
-      checkbox
-    hint: Check the box to display extension xdebug
-    target:
-      XDEBUG
+  # php_error_reporting:
+  #   label:
+  #     Enable PHP error reporting?
+  #   type:
+  #     checkbox
+  #   hint: Check the box to display PHP errors 
+  #   target:
+  #     DISPLAY_PHPERROR
+  # php_xdebug:
+  #   label:
+  #     Enable PHP extension XDEBUG?
+  #   type:
+  #     checkbox
+  #   hint: Check the box to display extension xdebug
+  #   target:
+  #     XDEBUG
     
   # MariaDB_version:
   #   label:
