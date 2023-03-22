@@ -12,7 +12,7 @@ ENV MAGENTO_VERSION 2.4.6
 
 COPY auth.json /root/.composer/auth.json
 # Persistent runtime dependencies
-# Example RUN apk add --no-cache php7-openssl php7-sysvmsg php7-curl
+# Example RUN apk add --no-cache php81-openssl php81-sysvmsg php81-curl
 
 WORKDIR /var/www
 
@@ -27,7 +27,7 @@ sed -i "s#{DISPLAY}#Off#g" /etc/php81/php.ini \
 #Xdebug enable or disable
 ARG XDEBUG
 RUN if [ ${XDEBUG} = true ]; then \
-apk add php7-pecl-xdebug \
+apk add php81-pecl-xdebug \
 && echo "zend_extension=xdebug" >> /etc/php81/php.ini \
 ;fi
 
