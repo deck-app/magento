@@ -16,7 +16,7 @@ return [
         'table_prefix' => '',
         'connection' => [
             'default' => [
-                'host' => 'mariadb-{DB_HOSTNAME}',
+                'host' => 'mariadb',
                 'dbname' => '{DB_NAME}',
                 'username' => '{DB_USER}',
                 'password' => '{DB_PASSWORD}',
@@ -78,7 +78,7 @@ return [
         'translate' => 1
     ],
     'downloadable_domains' => [
-        'gert.stacks.run'
+        'localhost'
     ],
     'install' => [
         'date' => 'Mon, 27 Jun 2022 17:14:03 +0000'

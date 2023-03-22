@@ -3,12 +3,9 @@ services:
   magento:
     build:
       context: 'magento'
-      dockerfile: 'Dockerfile-${PHP_VERSION}'
       args:
-        - 'BACK_END=${BACK_END}'
         - 'USER_ID=${USER_ID}'
         - 'GROUP_ID=${GROUP_ID}'
-        - 'PHP_VERSION=${PHP_VERSION}'
         - 'DISPLAY_PHPERROR=${DISPLAY_PHPERROR}'
         - 'XDEBUG=${XDEBUG}'
         - 'INSTALL_ADDITIONAL_EXTENSIONS=${INSTALL_ADDITIONAL_EXTENSIONS}'
@@ -46,7 +43,7 @@ services:
         volumes:
           - magento-es-data:/usr/share/elasticsearch/data
         ports:
-          - '${SEARCH_PORT}:9200'
+          - '9200:9200'
   phpmyadmin:
     image: phpmyadmin:latest
     environment:
