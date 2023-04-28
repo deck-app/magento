@@ -102,6 +102,10 @@ jobs:
           sleep 90s
           docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
           docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
+    - name: Container log check
+      run: |
+          sleep 30s
+          docker logs magento_magento_1
     # - name: Check Magento install or not
     #   run:  |
     #     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
