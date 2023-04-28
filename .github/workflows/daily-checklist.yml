@@ -104,7 +104,7 @@ jobs:
           docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
     - name: Container log check
       run: |
-          sleep 30s
+          sleep 120s
           docker logs magento_magento_1
     # - name: Check Magento install or not
     #   run:  |
