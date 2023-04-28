@@ -99,19 +99,16 @@ jobs:
       run: docker logs magento_magento_1
     - name: Pre-defined2 file download
       run: |
-          sleep 30s
+          sleep 60s
           docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
           docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
-    - name: Container log check
-      run: |
-          sleep 120s
+    - name: Check Magento install or not
+      run:  |
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
+        do 
+          sleep 50s
           docker logs magento_magento_1
-    # - name: Check Magento install or not
-    #   run:  |
-    #     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
-    #     do 
-    #       sleep 50s
-    #     done
+        done
     - name: Magento tset
       run: curl -i http://localhost:53487/
     - name: Destroy container and file
