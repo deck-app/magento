@@ -24,10 +24,7 @@ jobs:
     - name: Container check
       run:  docker ps
     - name: Pre-defined file download
-      run: |
-          docker exec magento_magento_1 wget -O /install.sh https://raw.githubusercontent.com/nabad600/image-test-file/main/install.sh
-          docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
-          docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
+      run: docker exec magento_magento_1 wget -O /install.sh https://raw.githubusercontent.com/nabad600/image-test-file/main/install.sh
     - name: Host Name check
       run: docker exec magento_magento_1 hostname
     
@@ -47,12 +44,18 @@ jobs:
       run: docker exec magento_magento_1 composer
     - name: Container log check
       run: docker logs magento_magento_1
+    - name: Pre-defined2 file download
+      run: |
+          docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
+          docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
     - name: Check Magento install or not
       run:  |
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
         do 
           sleep 50s
         done
+    - name: Magento tset
+      run: curl -i http://localhost:53487/
     - name: Destroy container and file
       run:  |
         docker-compose down
