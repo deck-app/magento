@@ -99,7 +99,7 @@ jobs:
       run: docker logs magento_magento_1
     - name: Pre-defined2 file download
       run: |
-          sleep 90s
+          sleep 30s
           docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
           docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
     - name: Container log check
