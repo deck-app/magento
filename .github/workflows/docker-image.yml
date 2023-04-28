@@ -17,6 +17,5 @@ jobs:
     - name: Build the Magento
       run: docker-compose build
       env:
-          PHP_VERSION: "7.4"
           XDEBUG: true
           DISPLAY_PHPERROR: true

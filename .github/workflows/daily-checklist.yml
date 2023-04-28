@@ -16,40 +16,48 @@ jobs:
     - name: Build the Docker image Magento, phpmyadmin, mariadb and elasticsearch
       run: docker-compose -f "docker-compose.yml" up -d --build
       env:
-        PHP_VERSION: "7.4"
         XDEBUG: true
         DISPLAY_PHPERROR: true
         APP_CODE_PATH_HOST: /tmp/magento
+        DATA_PATH_HOST: /tmp/db
         hostname: magento
     - name: Container check
       run:  docker ps
+    - name: Pre-defined file download
+      run: |
+          docker exec magento_magento_1 wget -O /install.sh https://raw.githubusercontent.com/nabad600/image-test-file/main/install.sh
+          docker exec magento_magento_1 wget -O /var/www/app/etc/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/env.php
+          docker exec magento_magento_1 wget -O /var/www/app/env.php https://raw.githubusercontent.com/nabad600/image-test-file/main/app.env
     - name: Host Name check
       run: docker exec magento_magento_1 hostname
-    # - name: PHP version check
-    #   run: docker exec magento_magento_1 php -v
-    # - name: Mysql Driver check
-    #   run: docker exec magento_magento_1 php -m | grep mysql
-    # - name: Git Version check
-    #   run: docker exec magento_magento_1 git --version
-    # - name: Curl Version check
-    #   run: docker exec magento_magento_1 curl --version
-    # - name: Nodejs Version check
-    #   run: docker exec magento_magento_1 node --version
-    # - name: NPM Version check
-    #   run: docker exec magento_magento_1 npm --version
-    # - name: Composer test
-    #   run: docker exec magento_magento_1 composer
-    # - name: Container log check
-    #   run: docker logs magento_magento_1
-    # - name: Check Magento install or not
-    #   run:  |
-    #     while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
-    #     do 
-    #       sleep 50s
-    #     done
-    # - name: Destroy container and file
-    #   run:  |
-    #     docker-compose down
-    #     docker stop $(docker ps -a -q)
-    #     echo "y" | docker system prune -a
-    #     sudo rm -rf /tmp/magento
+    
+    - name: PHP version check
+      run: docker exec magento_magento_1 php -v
+    - name: Mysql Driver check
+      run: docker exec magento_magento_1 php -m | grep mysql
+    - name: Git Version check
+      run: docker exec magento_magento_1 git --version
+    - name: Curl Version check
+      run: docker exec magento_magento_1 curl --version
+    - name: Nodejs Version check
+      run: docker exec magento_magento_1 node --version
+    - name: NPM Version check
+      run: docker exec magento_magento_1 npm --version
+    - name: Composer test
+      run: docker exec magento_magento_1 composer
+    - name: Container log check
+      run: docker logs magento_magento_1
+    - name: Check Magento install or not
+      run:  |
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:53487/index.php)" != "200" ]]; 
+        do 
+          sleep 50s
+        done
+    - name: Destroy container and file
+      run:  |
+        docker-compose down
+        docker stop $(docker ps -a -q)
+        echo "y" | docker system prune -a
+        sudo rm -rf /tmp/magento
+        sudo rm -rf /tmp/db
+    
